@@ -75,8 +75,19 @@ Traces appear after a few seconds. Metrics are exported every 10 seconds.
 
 ### Stop
 
-Press `Ctrl+C` in the terminal running the container (`--rm` removes it), or run
-`podman stop lgtm`.
+1. Stop the app with `Ctrl+C` in its terminal.
+2. Stop the Grafana container: press `Ctrl+C` in its terminal, or run `podman stop lgtm`.
+   The container was started with `--rm`, so it is removed and its traces and metrics are lost.
+3. Optional, to free memory (roughly 1-2 GB): stop the Podman VM.
+
+   ```powershell
+   podman machine stop
+   ```
+
+   Images are kept, so the next start is quick. If WSL still holds memory afterwards, run
+   `wsl --shutdown`.
+
+To start again: `podman machine start`, then the Grafana command from step 1 of Run.
 
 ## Scripts
 
